@@ -1,0 +1,22 @@
+@extends('$VIEW_PREFIX$layouts.app')
+
+@section('title')
+    {{ $$MODEL_NAME_CAMEL$->name }} <small>{{ $title }}</small>
+@endsection
+
+@section('content')
+   <div class="content">
+       @include('adminlte-templates::common.errors')
+       <div class="box box-primary">
+           <div class="box-body">
+               <div class="row">
+                   {!! Form::model($$MODEL_NAME_CAMEL$, ['route' => ['$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_DASHED$.update', $$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$], 'method' => 'patch', 'files' => true]) !!}
+
+                        @include('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.fields')
+
+                   {!! Form::close() !!}
+               </div>
+           </div>
+       </div>
+   </div>
+@endsection

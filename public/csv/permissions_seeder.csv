@@ -1,0 +1,54 @@
+name,module_id,display_name,description,is_protected
+
+adminpanel,1,"Admin Panel","Admin Panel",1
+dashboard,2,Dashboard,Dashboard,1
+users.index,3,"List Users","List Roles",1
+users.create,3,"Create Users","Create Users",1
+users.show,3,"View User","View User",1
+users.edit,3,"Edit User","Edit User",1
+users.destroy,3,"Delete User","Delete User",1
+roles.index,4,"List Roles","List Roles",1
+roles.create,4,"Create Role","Create Role",1
+roles.show,4,"View Role","View Role",1
+roles.edit,4,"Edit Role","Edit Role",1
+roles.destroy,4,"Delete Role","Delete Role",1
+permissions.index,5,"List Permissions","List Permissions",1
+permissions.create,5,"Create Permission","Create Permission",1
+permissions.show,5,"View Permission","View Permission",1
+permissions.edit,5,"Edit Permission","Edit Permission",1
+permissions.destroy,5,"Delete Permission","Delete Permission",1
+modules.index,6,"List Modules","List Modules",1
+modules.create,6,"Create Module","Create Module",1
+modules.show,6,"View Module","View Module",1
+modules.edit,6,"Edit Module","Edit Module",1
+modules.destroy,6,"Delete Module","Delete Module",1
+languages.index,7,"List Languages","List Languages",1
+languages.create,7,"Create Languages","Create Languages",1
+languages.show,7,"View Languages","View Languages",1
+languages.edit,7,"Edit Languages","Edit Languages",1
+languages.destroy,7,"Delete Languages","Delete Languages",1
+pages.index,8,"List Pages","List Pages",1
+pages.create,8,"Create Pages","Create Pages",1
+pages.show,8,"View Pages","View Pages",1
+pages.edit,8,"Edit Pages","Edit Pages",1
+pages.destroy,8,"Delete Pages","Delete Pages",1
+contactus.index,9,"List Contact Us","List Contact Us Record",1
+contactus.create,9,"Create Contact Us","Create Contact Us Record",1
+contactus.show,9,"View Contact Us","View Contact Us Record",1
+contactus.edit,9,"Edit Contact Us","Edit Contact Us Record",1
+contactus.destroy,9,"Delete Contact Us","Delete Contact Us Record",1
+notifications.index,10,"List Notification","List Notification",1
+notifications.create,10,"Create Notification","Create Notification",1
+notifications.show,10,"View Notification","View Notification",1
+notifications.edit,10,"Edit Notification","Edit Notification",1
+notifications.destroy,10,"Delete Notification","Delete Notification",1
+menus.index,11,"List Menu","List Menu",1
+menus.create,11,"Create Menu","Create Menu",1
+menus.show,11,"View Menu","View Menu",1
+menus.edit,11,"Edit Menu","Edit Menu",1
+menus.destroy,11,"Delete Menu","Delete Menu",1
+settings.index,12,Settings,"Index Settings",1
+settings.create,12,Settings,"Create Settings",1
+settings.show,12,Settings,"Show Settings",1
+settings.edit,12,Settings,"Edit Settings",1
+settings.destroy,12,Settings,"Destroy Settings",1

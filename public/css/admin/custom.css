@@ -1,0 +1,16 @@
+textarea {
+    Resize: vertical
+}
+
+.dataTables_filter {
+    float: right;
+}
+
+.dataTables_info {
+    float: left;
+}
+
+.dataTables_length {
+    float: right;
+    padding: 0 0 0 5px;
+}

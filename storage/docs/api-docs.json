@@ -1,0 +1,2260 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Laravel APIs Generator ",
+        "version": "1.0.0"
+    },
+    "basePath": "/infyom-boilerplate/api/v1",
+    "paths": {
+        "/register": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "Register a new user.",
+                "description": "Register User",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "User that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Register"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Register"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "Login a user.",
+                "description": "Login User",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "User that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Login"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Login"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/social_login": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "Login With Social Account.",
+                "description": "Login With Social Account.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Login With Social Account.",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/SocialAccounts"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/SocialAccounts"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/me": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "user profile.",
+                "description": "user profile.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "description": "Get the authenticated User.",
+                                    "type": "boolean"
+                                },
+                                "message": {
+                                    "description": "Get the authenticated User.",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/refresh": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "refresh auth token.",
+                "description": "refresh auth token.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "description": "Refresh a token.",
+                                    "type": "boolean"
+                                },
+                                "message": {
+                                    "description": "Refresh a token.",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "logout user.",
+                "description": "logout user.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "description": "Log the user out (Invalidate the token).",
+                                    "type": "boolean"
+                                },
+                                "message": {
+                                    "description": "Log the user out (Invalidate the token).",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/forget-password": {
+            "get": {
+                "tags": [
+                    "Passwords"
+                ],
+                "summary": "Forget password request.",
+                "description": "Register User",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "User email",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/verify-reset-code": {
+            "post": {
+                "tags": [
+                    "Passwords"
+                ],
+                "summary": "verify forget password request code.",
+                "description": "verify code",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "verification_code",
+                        "in": "query",
+                        "description": "verification code",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/reset-password": {
+            "post": {
+                "tags": [
+                    "Passwords"
+                ],
+                "summary": "Reset password.",
+                "description": "Reset password.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "user email ",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "verification_code",
+                        "in": "query",
+                        "description": "verification code",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "new password",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "in": "query",
+                        "description": "confirm password",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/change-password": {
+            "post": {
+                "tags": [
+                    "Passwords"
+                ],
+                "summary": "Change password.",
+                "description": "Change Password password.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "current_password",
+                        "in": "query",
+                        "description": "Current Password",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "new password",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "in": "query",
+                        "description": "confirm password",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/contactus": {
+            "get": {
+                "tags": [
+                    "ContactUs"
+                ],
+                "summary": "Get a listing of the contactus.",
+                "description": "Get all contactus",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Pass the property name you want to sort your response. If not found, Returns All Records in DB without sorting.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sortedBy",
+                        "in": "query",
+                        "description": "Pass 'asc' or 'desc' to define the sorting method. If not found, 'asc' will be used by default",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Change the Default Record Count. If not found, Returns All Records in DB.",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "Change the Default Offset of the Query. If not found, 0 will be used.",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/ContactUs"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "ContactUs"
+                ],
+                "summary": "Store a newly created ContactUs in storage",
+                "description": "Store ContactUs",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "ContactUs that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ContactUs"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/ContactUs"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/contactus/{id}": {
+            "get": {
+                "tags": [
+                    "ContactUs"
+                ],
+                "summary": "Display the specified ContactUs",
+                "description": "Get ContactUs",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of ContactUs",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/ContactUs"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "ContactUs"
+                ],
+                "summary": "Update the specified ContactUs in storage",
+                "description": "Update ContactUs",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of ContactUs",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "ContactUs that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ContactUs"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/ContactUs"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ContactUs"
+                ],
+                "summary": "Remove the specified ContactUs from storage",
+                "description": "Delete ContactUs",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of ContactUs",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/languages": {
+            "get": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Get a listing of the Languages.",
+                "description": "Get all Languages",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Pass the property name you want to sort your response. If not found, Returns All Records in DB without sorting.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sortedBy",
+                        "in": "query",
+                        "description": "Pass 'asc' or 'desc' to define the sorting method. If not found, 'asc' will be used by default",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Change the Default Record Count. If not found, Returns All Records in DB.",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "Change the Default Offset of the Query. If not found, 0 will be used.",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Language"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Store a newly created Language in storage",
+                "description": "Store Language",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Language that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Language"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Language"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/languages/{id}": {
+            "get": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Display the specified Language",
+                "description": "Get Language",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Language",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Language"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Update the specified Language in storage",
+                "description": "Update Language",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Language",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Language that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Language"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Language"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Remove the specified Language from storage",
+                "description": "Delete Language",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Language",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/notifications": {
+            "get": {
+                "tags": [
+                    "Notification"
+                ],
+                "summary": "Get a listing of the Notifications.",
+                "description": "Get all Notifications",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Pass the property name you want to sort your response. If not found, Returns All Records in DB without sorting.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sortedBy",
+                        "in": "query",
+                        "description": "Pass 'asc' or 'desc' to define the sorting method. If not found, 'asc' will be used by default",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Change the Default Record Count. If not found, Returns All Records in DB.",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "Change the Default Offset of the Query. If not found, 0 will be used.",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Notification"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Notification"
+                ],
+                "summary": "Store a newly created Notification in storage",
+                "description": "Store Notification",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Notification that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Notification"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Notification"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/notifications/{id}": {
+            "get": {
+                "tags": [
+                    "Notification"
+                ],
+                "summary": "Display the specified Notification",
+                "description": "Get Notification",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Notification",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Notification"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Notification"
+                ],
+                "summary": "Update the specified Notification in storage",
+                "description": "Update Notification",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Notification",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Notification that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Notification"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Notification"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Notification"
+                ],
+                "summary": "Remove the specified Notification from storage",
+                "description": "Delete Notification",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Notification",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/pages": {
+            "get": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Get a listing of the Pages.",
+                "description": "Get all Pages",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Pass the property name you want to sort your response. If not found, Returns All Records in DB without sorting.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sortedBy",
+                        "in": "query",
+                        "description": "Pass 'asc' or 'desc' to define the sorting method. If not found, 'asc' will be used by default",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Change the Default Record Count. If not found, Returns All Records in DB.",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "Change the Default Offset of the Query. If not found, 0 will be used.",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Page"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Store a newly created Page in storage",
+                "description": "Store Page",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Page that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Page"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Page"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/pages/{id}": {
+            "get": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Display the specified Page",
+                "description": "Get Page",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Page",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Page"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Update the specified Page in storage",
+                "description": "Update Page",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Page",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Page that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Page"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Page"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Remove the specified Page from storage",
+                "description": "Delete Page",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Page",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/settings": {
+            "get": {
+                "tags": [
+                    "Setting"
+                ],
+                "summary": "Get a listing of the Settings.",
+                "description": "Get all Settings",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Pass the property name you want to sort your response. If not found, Returns All Records in DB without sorting.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sortedBy",
+                        "in": "query",
+                        "description": "Pass 'asc' or 'desc' to define the sorting method. If not found, 'asc' will be used by default",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Change the Default Record Count. If not found, Returns All Records in DB.",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "Change the Default Offset of the Query. If not found, 0 will be used.",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Setting"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get a listing of the Users.",
+                "description": "Get all Users",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Pass the property name you want to sort your response. If not found, Returns All Records in DB without sorting.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sortedBy",
+                        "in": "query",
+                        "description": "Pass 'asc' or 'desc' to define the sorting method. If not found, 'asc' will be used by default",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Change the Default Record Count. If not found, Returns All Records in DB.",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "Change the Default Offset of the Query. If not found, 0 will be used.",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/User"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Store a newly created Customer in storage",
+                "description": "Store User",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "User that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/User"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Display the specified User",
+                "description": "Get User",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of User",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/User"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update the specified User in storage",
+                "description": "Update User",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of User",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "User that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/User"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Remove the specified User from storage",
+                "description": "Delete User",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "User Auth Token{ Bearer ABC123 }",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer ABC123"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of User",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ContactUs": {
+            "required": [
+                "name",
+                "email",
+                "subject",
+                "message"
+            ],
+            "properties": {
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "email",
+                    "type": "string"
+                },
+                "subject": {
+                    "description": "subject",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "message",
+                    "type": "string"
+                }
+            }
+        },
+        "Language": {
+            "required": [
+                "code",
+                "title",
+                "native_name",
+                "direction",
+                "status"
+            ],
+            "properties": {
+                "code": {
+                    "description": "code",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "title",
+                    "type": "string"
+                },
+                "native_name": {
+                    "description": "native_name",
+                    "type": "string"
+                },
+                "direction": {
+                    "description": "direction",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "status",
+                    "type": "integer"
+                }
+            }
+        },
+        "Login": {
+            "required": [
+                "email",
+                "password",
+                "device_type",
+                "device_token"
+            ],
+            "properties": {
+                "email": {
+                    "description": "User Email",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "password",
+                    "type": "string"
+                },
+                "device_type": {
+                    "description": "device_type: ios,android,web",
+                    "type": "string"
+                },
+                "device_token": {
+                    "description": "device_token",
+                    "type": "string"
+                }
+            }
+        },
+        "Menu": {
+            "required": [
+                "name",
+                "icon",
+                "slug",
+                "position",
+                "is_protected",
+                "static",
+                "status"
+            ],
+            "properties": {
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "icon",
+                    "type": "string"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "position": {
+                    "description": "position",
+                    "type": "integer"
+                },
+                "is_protected": {
+                    "description": "is_protected",
+                    "type": "integer"
+                },
+                "static": {
+                    "description": "static",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "status",
+                    "type": "integer"
+                }
+            }
+        },
+        "Notification": {
+            "required": [
+                "sender_id",
+                "url",
+                "action_type",
+                "ref_id",
+                "message",
+                "status"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "sender_id": {
+                    "description": "sender_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "url": {
+                    "description": "url",
+                    "type": "string"
+                },
+                "action_type": {
+                    "description": "action_type",
+                    "type": "string"
+                },
+                "ref_id": {
+                    "description": "ref_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "description": "message",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "status",
+                    "type": "boolean"
+                }
+            }
+        },
+        "Page": {
+            "required": [
+                "slug",
+                "status"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "status",
+                    "type": "boolean"
+                }
+            }
+        },
+        "Permission": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "Register": {
+            "required": [
+                "name",
+                "email",
+                "phone",
+                "address",
+                "image",
+                "password",
+                "password_confirmation",
+                "device_token",
+                "device_type"
+            ],
+            "properties": {
+                "name": {
+                    "description": "User Name",
+                    "type": "string"
+                },
+                "address": {
+                    "description": "User address",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "User Phone Name",
+                    "type": "string"
+                },
+                "image": {
+                    "description": "User Image {upload file}",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "User Email",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "Password",
+                    "type": "string"
+                },
+                "password_confirmation": {
+                    "description": "Password Confirmation",
+                    "type": "string"
+                },
+                "device_token": {
+                    "description": "Device Token",
+                    "type": "string"
+                },
+                "device_type": {
+                    "description": "User Device Type:ios,android,web",
+                    "type": "string"
+                }
+            }
+        },
+        "Role": {
+            "required": [
+                "name",
+                "description"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "Setting": {
+            "required": [
+                "default_language",
+                "email",
+                "logo",
+                "phone",
+                "latitude",
+                "longitude",
+                "playstore",
+                "appstore",
+                "social_links",
+                "app_version",
+                "force_update"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "default_language": {
+                    "description": "default_language",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "email",
+                    "type": "string"
+                },
+                "logo": {
+                    "description": "logo",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "phone",
+                    "type": "string"
+                },
+                "latitude": {
+                    "description": "latitude",
+                    "type": "string"
+                },
+                "longitude": {
+                    "description": "longitude",
+                    "type": "string"
+                },
+                "playstore": {
+                    "description": "playstore",
+                    "type": "string"
+                },
+                "appstore": {
+                    "description": "appstore",
+                    "type": "string"
+                },
+                "social_links": {
+                    "description": "social_links",
+                    "type": "string"
+                },
+                "app_version": {
+                    "description": "app_version",
+                    "type": "number",
+                    "format": "float"
+                },
+                "force_update": {
+                    "description": "force_update",
+                    "type": "string"
+                }
+            }
+        },
+        "SocialAccounts": {
+            "required": [
+                "platform",
+                "client_id",
+                "token",
+                "username",
+                "email",
+                "expires_at",
+                "image"
+            ],
+            "properties": {
+                "platform": {
+                    "description": "platform",
+                    "type": "string"
+                },
+                "client_id": {
+                    "description": "client_id",
+                    "type": "integer"
+                },
+                "token": {
+                    "description": "token",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "username",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "email",
+                    "type": "string"
+                },
+                "image": {
+                    "description": "image",
+                    "type": "string"
+                },
+                "device_token": {
+                    "description": "User Device Token",
+                    "type": "string"
+                },
+                "device_type": {
+                    "description": "User Device Type:ios,android,web",
+                    "type": "string"
+                },
+                "expires_at": {
+                    "description": "expires_at",
+                    "type": "string"
+                }
+            }
+        },
+        "User": {
+            "required": [
+                "name",
+                "email",
+                "password"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        }
+    }
+}

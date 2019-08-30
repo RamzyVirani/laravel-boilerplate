@@ -1,0 +1,10 @@
+@push('css')
+    @include('$VIEW_PREFIX$layouts.datatables_css')
+@endpush
+
+{!! $dataTable->table(['width' => '100%']) !!}
+
+@push('scripts')
+    @include('$VIEW_PREFIX$layouts.datatables_js')
+    {!! $dataTable->scripts() !!}
+@endpush

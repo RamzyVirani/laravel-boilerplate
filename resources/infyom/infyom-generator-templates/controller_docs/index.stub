@@ -1,0 +1,70 @@
+/**
+     * @param Request $request
+     * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     * @return Response
+     *
+     * @SWG\Get(
+     *      path="/$MODEL_NAME_PLURAL_DASHED$",
+     *      summary="Get a listing of the $MODEL_NAME_PLURAL$.",
+     *      tags={"$MODEL_NAME$"},
+     *      description="Get all $MODEL_NAME_PLURAL$",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="Authorization",
+     *          description="User Auth Token{ Bearer ABC123 }",
+     *          type="string",
+     *          required=true,
+     *          default="Bearer ABC123",
+     *          in="header"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="orderBy",
+     *          description="Pass the property name you want to sort your response. If not found, Returns All Records in DB without sorting.",
+     *          type="string",
+     *          required=false,
+     *          in="query"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="sortedBy",
+     *          description="Pass 'asc' or 'desc' to define the sorting method. If not found, 'asc' will be used by default",
+     *          type="string",
+     *          required=false,
+     *          in="query"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="limit",
+     *          description="Change the Default Record Count. If not found, Returns All Records in DB.",
+     *          type="integer",
+     *          required=false,
+     *          in="query"
+     *      ),
+     *     @SWG\Parameter(
+     *          name="offset",
+     *          description="Change the Default Offset of the Query. If not found, 0 will be used.",
+     *          type="integer",
+     *          required=false,
+     *          in="query"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/$MODEL_NAME$")
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */

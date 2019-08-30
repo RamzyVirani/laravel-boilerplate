@@ -1,0 +1,1 @@
+Route::resource('$MODEL_NAME_PLURAL_DASHED$', '$PATH_PREFIX$$MODEL_NAME$Controller');
