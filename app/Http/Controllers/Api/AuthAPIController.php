@@ -242,7 +242,7 @@ class AuthAPIController extends AppBaseController
             $user = $account->user;
         } else {
             // Check if email address already exists. if yes, then link social account. else register new user.
-            if (property_exists($input, 'email')) {
+            if (isset($input['email'])) {
                 $user = $this->userRepository->findWhere(['email' => $input['email']])->first();
             }
 
@@ -260,6 +260,8 @@ class AuthAPIController extends AppBaseController
                 if ($request->hasFile('image')) {
                     $file                 = $request->file('image');
                     $userDetails['image'] = Storage::putFile('users', $file);
+                } else {
+                    $userDetails['image'] = isset($input['image']) ? $input['image'] : null;
                 }
                 $userDetails['email_updates']   = 1;
                 $userDetails['is_social_login'] = 1;
@@ -269,7 +271,7 @@ class AuthAPIController extends AppBaseController
             $this->socialAccountRepository->saveRecord($user->id, $request);
         }
 
-        if (property_exists($input, 'username')) {
+        if (isset($input['username'])) {
             $user->name = $input['username'];
             $user->save();
         }
