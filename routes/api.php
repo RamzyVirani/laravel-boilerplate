@@ -59,13 +59,13 @@ Route::get('v1/forget-password', 'AuthAPIController@getForgetPasswordCode')->nam
 Route::post('v1/verify-reset-code', 'AuthAPIController@verifyCode')->name('verify-code');
 Route::post('v1/reset-password', 'AuthAPIController@updatePassword')->name('reset-password');
 Route::resource('v1/settings', 'SettingAPIController');
+Route::post('v1/refresh', 'AuthAPIController@refresh');
 Route::middleware('auth:api')->group(function () {
     ## Token Required to below APIs
     Route::post('v1/logout', 'AuthAPIController@logout');
 
     Route::post('v1/change-password', 'AuthAPIController@changePassword');
 
-    Route::post('v1/refresh', 'AuthAPIController@refresh');
     Route::post('v1/me', 'AuthAPIController@me');
 
     Route::resource('v1/users', 'UserAPIController');

@@ -363,6 +363,12 @@ class AuthAPIController extends AppBaseController
      */
     public function refresh(Request $request)
     {
+        $token = auth()->guard('api')->getToken();
+        $user  = auth()->guard('api')->setToken($token)->user();
+        if ($user != null) {
+            $new_token = auth()->guard('api')->setTTL(config('jwt.refresh_ttl') / 2)->fromUser($user);
+            return $this->respondWithToken($new_token, $request);
+        }
         // FIXME: Find a better fix. This is not a good workaround. but working fine.
         auth()->guard('api')->factory()->setTTL(config('jwt.refresh_ttl'));
 
