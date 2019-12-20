@@ -6,6 +6,7 @@ use App\DataTables\Admin\UserDataTable;
 use App\Helper\BreadcrumbsRegister;
 use App\Http\Requests\Admin\CreateUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
+use App\Models\Role;
 use App\Repositories\Admin\RoleRepository;
 use App\Repositories\Admin\UserDetailRepository;
 use App\Repositories\Admin\UserRepository;
@@ -65,7 +66,8 @@ class UserController extends AppBaseController
         $roles = $this->roleRepository->all()->where('id', '!=', '1')->pluck('display_name', 'id')->all();
         return view('admin.users.create')->with([
             'title' => $this->BreadCrumbName,
-            'roles' => $roles
+            'roles' => $roles,
+            'profile' => false,
         ]);
     }
 
@@ -117,7 +119,10 @@ class UserController extends AppBaseController
 
         $roles = $this->roleRepository->all()->where('id', '!=', '1')->pluck('display_name', 'id')->all();
         BreadcrumbsRegister::Register($this->ModelName, $this->BreadCrumbName, $user);
-        return view('admin.users.edit')->with(['user' => $user, 'title' => $this->BreadCrumbName, 'roles' => $roles]);
+
+        $profile = (auth()->user()->id == $id || $id == Role::ROLE_SUPER_ADMIN) ? true : false;
+
+        return view('admin.users.edit')->with(['user' => $user, 'title' => $this->BreadCrumbName, 'roles' => $roles, 'profile' => $profile,]);
     }
 
     /**
@@ -172,6 +177,6 @@ class UserController extends AppBaseController
         $this->BreadCrumbName = 'Profile';
 
         BreadcrumbsRegister::Register($this->ModelName, $this->BreadCrumbName);
-        return view('admin.users.edit')->with(['title' => $this->BreadCrumbName, 'user' => $user]);
+        return view('admin.users.edit')->with(['title' => $this->BreadCrumbName, 'user' => $user, 'profile' => true,]);
     }
 }

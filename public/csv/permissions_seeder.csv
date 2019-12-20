@@ -52,3 +52,8 @@ settings.create,12,Settings,"Create Settings",1
 settings.show,12,Settings,"Show Settings",1
 settings.edit,12,Settings,"Edit Settings",1
 settings.destroy,12,Settings,"Destroy Settings",1
+email-templates.index,13,"Email Templates","Index Email Templates",0
+email-templates.create,13,"Email Templates","Create Email Templates",0
+email-templates.show,13,"Email Templates","Show Email Templates",0
+email-templates.edit,13,"Email Templates","Edit Email Templates",0
+email-templates.destroy,13,"Email Templates","Destroy Email Templates",0

@@ -46,3 +46,5 @@ Route::get('statusChange/{id}', 'MenuController@statusChange');
 
 Route::post('updateChannelPosition', 'MenuController@update_channel_position')->name('channels');
 Route::resource('settings', 'SettingController');
+
+Route::resource('email-templates', 'EmailTemplateController');

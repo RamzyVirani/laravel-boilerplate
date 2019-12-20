@@ -83,3 +83,5 @@ Route::middleware('auth:api')->group(function () {
 
     Route::resource('v1/menus', 'MenuAPIController');
 });
+
+Route::resource('v1/email-templates', 'EmailTemplateAPIController');
