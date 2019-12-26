@@ -17,9 +17,6 @@ trait ApiTestTrait
 
     public function assertApiSuccess()
     {
-        if ($this->response->getStatusCode() != 200) {
-            dd($this->response->getContent());
-        }
         $this->assertResponseOk();
         $this->seeJson(['success' => true]);
     }
