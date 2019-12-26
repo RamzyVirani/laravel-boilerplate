@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Api;
 
+use App\Models\Setting;
+
 class UpdateSettingAPIRequest extends BaseAPIRequest
 {
     /**

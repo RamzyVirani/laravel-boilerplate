@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Traits;
+
+use \App;
 use Faker\Factory as Faker;
 use App\Models\Setting;
 use App\Repositories\Admin\SettingRepository;
@@ -16,7 +19,7 @@ trait MakeSettingTrait
     {
         /** @var SettingRepository $settingRepo */
         $settingRepo = App::make(SettingRepository::class);
-        $theme = $this->fakeSettingData($settingFields);
+        $theme       = $this->fakeSettingData($settingFields);
         return $settingRepo->create($theme);
     }
 
@@ -42,20 +45,20 @@ trait MakeSettingTrait
         $fake = Faker::create();
 
         return array_merge([
-            'default_language' => $fake->word,
-            'email' => $fake->word,
-            'logo' => $fake->word,
-            'phone' => $fake->word,
-            'latitude' => $fake->word,
-            'longitude' => $fake->word,
-            'playstore' => $fake->word,
-            'appstore' => $fake->word,
-            'social_links' => $fake->text,
-            'app_version' => $fake->randomDigitNotNull,
-            'force_update' => $fake->word,
-            'created_at' => $fake->date('Y-m-d H:i:s'),
-            'updated_at' => $fake->date('Y-m-d H:i:s'),
-            'deleted_at' => $fake->date('Y-m-d H:i:s')
+            'default_language' => $fake->languageCode,
+            'email'            => $fake->email,
+//            'logo'             => $fake->word,
+            'phone'            => $fake->phoneNumber,
+            'latitude'         => $fake->latitude,
+            'longitude'        => $fake->longitude,
+            'playstore'        => $fake->word,
+            'appstore'         => $fake->word,
+            'social_links'     => $fake->text,
+            'app_version'      => $fake->randomDigitNotNull,
+            'force_update'     => $fake->numberBetween(0, 1),
+//            'created_at'       => $fake->date('Y-m-d H:i:s'),
+//            'updated_at'       => $fake->date('Y-m-d H:i:s'),
+//            'deleted_at'       => $fake->date('Y-m-d H:i:s')
         ], $settingFields);
     }
 }

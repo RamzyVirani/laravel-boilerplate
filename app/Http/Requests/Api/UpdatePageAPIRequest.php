@@ -27,6 +27,6 @@ class UpdatePageAPIRequest extends BaseAPIRequest
      */
     public function rules()
     {
-        return Page::$rules;
+        return Page::$api_update_rules;
     }
 }

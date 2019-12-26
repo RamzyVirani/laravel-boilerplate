@@ -1,5 +1,11 @@
 <?php
 
+namespace Tests\Repository;
+
+use \App;
+use Tests\ApiTestTrait;
+use Tests\TestCase;
+use \Tests\Traits\Make$MODEL_NAME$Trait;
 use $NAMESPACE_MODEL$\$MODEL_NAME$;
 use $NAMESPACE_REPOSITORY$\$MODEL_NAME$Repository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;

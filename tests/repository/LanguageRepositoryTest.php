@@ -1,8 +1,14 @@
 <?php
 
+namespace Tests\Repository;
+
+use \App;
+use Tests\ApiTestTrait;
+use Tests\TestCase;
 use App\Models\Language;
 use App\Repositories\Admin\LanguageRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\Traits\MakeLanguageTrait;
 
 class LanguageRepositoryTest extends TestCase
 {
@@ -24,7 +30,7 @@ class LanguageRepositoryTest extends TestCase
      */
     public function testCreateLanguage()
     {
-        $language = $this->fakeLanguageData();
+        $language        = $this->fakeLanguageData();
         $createdLanguage = $this->languageRepo->create($language);
         $createdLanguage = $createdLanguage->toArray();
         $this->assertArrayHasKey('id', $createdLanguage);
@@ -38,7 +44,7 @@ class LanguageRepositoryTest extends TestCase
      */
     public function testReadLanguage()
     {
-        $language = $this->makeLanguage();
+        $language   = $this->makeLanguage();
         $dbLanguage = $this->languageRepo->find($language->id);
         $dbLanguage = $dbLanguage->toArray();
         $this->assertModelData($language->toArray(), $dbLanguage);
@@ -49,8 +55,8 @@ class LanguageRepositoryTest extends TestCase
      */
     public function testUpdateLanguage()
     {
-        $language = $this->makeLanguage();
-        $fakeLanguage = $this->fakeLanguageData();
+        $language        = $this->makeLanguage();
+        $fakeLanguage    = $this->fakeLanguageData();
         $updatedLanguage = $this->languageRepo->update($fakeLanguage, $language->id);
         $this->assertModelData($fakeLanguage, $updatedLanguage->toArray());
         $dbLanguage = $this->languageRepo->find($language->id);
@@ -63,7 +69,7 @@ class LanguageRepositoryTest extends TestCase
     public function testDeleteLanguage()
     {
         $language = $this->makeLanguage();
-        $resp = $this->languageRepo->delete($language->id);
+        $resp     = $this->languageRepo->delete($language->id);
         $this->assertTrue($resp);
         $this->assertNull(Language::find($language->id), 'Language should not exist in DB');
     }

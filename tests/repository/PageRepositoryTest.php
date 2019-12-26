@@ -1,8 +1,14 @@
 <?php
 
+namespace Tests\Repository;
+
+use \App;
+use Tests\ApiTestTrait;
+use Tests\TestCase;
 use App\Models\Page;
 use App\Repositories\Admin\PageRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\Traits\MakePageTrait;
 
 class PageRepositoryTest extends TestCase
 {
@@ -24,7 +30,7 @@ class PageRepositoryTest extends TestCase
      */
     public function testCreatePage()
     {
-        $page = $this->fakePageData();
+        $page        = $this->fakePageData();
         $createdPage = $this->pageRepo->create($page);
         $createdPage = $createdPage->toArray();
         $this->assertArrayHasKey('id', $createdPage);
@@ -38,7 +44,7 @@ class PageRepositoryTest extends TestCase
      */
     public function testReadPage()
     {
-        $page = $this->makePage();
+        $page   = $this->makePage();
         $dbPage = $this->pageRepo->find($page->id);
         $dbPage = $dbPage->toArray();
         $this->assertModelData($page->toArray(), $dbPage);
@@ -49,8 +55,8 @@ class PageRepositoryTest extends TestCase
      */
     public function testUpdatePage()
     {
-        $page = $this->makePage();
-        $fakePage = $this->fakePageData();
+        $page        = $this->makePage();
+        $fakePage    = $this->fakePageData();
         $updatedPage = $this->pageRepo->update($fakePage, $page->id);
         $this->assertModelData($fakePage, $updatedPage->toArray());
         $dbPage = $this->pageRepo->find($page->id);

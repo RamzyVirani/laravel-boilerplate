@@ -217,7 +217,7 @@ class PageAPIController extends AppBaseController
     {
         $page = $this->pageRepository->findWithoutFail($id);
         if (empty($page)) {
-            return $this->sendError('Page not found');
+            return $this->sendErrorWithData(['Page not found']);
         }
 
         return $this->sendResponse($page->toArray(), 'Page retrieved successfully');
@@ -281,7 +281,7 @@ class PageAPIController extends AppBaseController
     {
         $page = $this->pageRepository->findWithoutFail($id);
         if (empty($page)) {
-            return $this->sendError('Page not found');
+            return $this->sendErrorWithData(['Page not found']);
         }
 
         $page = $this->pageRepository->updateRecord($request, $page, $this->languageRepository, $this->pageTranslationRepository);
@@ -338,7 +338,7 @@ class PageAPIController extends AppBaseController
     {
         $page = $this->pageRepository->findWithoutFail($id);
         if (empty($page)) {
-            return $this->sendError('Page not found');
+            return $this->sendErrorWithData(['Page not found']);
         }
 
         $this->pageRepository->deleteRecord($id);

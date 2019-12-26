@@ -1,8 +1,14 @@
 <?php
 
+namespace Tests\Repository;
+
+use \App;
+use Tests\ApiTestTrait;
+use Tests\TestCase;
 use App\Models\EmailTemplate;
 use App\Repositories\Admin\EmailTemplateRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\Traits\MakeEmailTemplateTrait;
 
 class EmailTemplateRepositoryTest extends TestCase
 {
@@ -24,7 +30,7 @@ class EmailTemplateRepositoryTest extends TestCase
      */
     public function testCreateEmailTemplate()
     {
-        $emailTemplate = $this->fakeEmailTemplateData();
+        $emailTemplate        = $this->fakeEmailTemplateData();
         $createdEmailTemplate = $this->emailTemplateRepo->create($emailTemplate);
         $createdEmailTemplate = $createdEmailTemplate->toArray();
         $this->assertArrayHasKey('id', $createdEmailTemplate);
@@ -38,7 +44,7 @@ class EmailTemplateRepositoryTest extends TestCase
      */
     public function testReadEmailTemplate()
     {
-        $emailTemplate = $this->makeEmailTemplate();
+        $emailTemplate   = $this->makeEmailTemplate();
         $dbEmailTemplate = $this->emailTemplateRepo->find($emailTemplate->id);
         $dbEmailTemplate = $dbEmailTemplate->toArray();
         $this->assertModelData($emailTemplate->toArray(), $dbEmailTemplate);
@@ -49,8 +55,8 @@ class EmailTemplateRepositoryTest extends TestCase
      */
     public function testUpdateEmailTemplate()
     {
-        $emailTemplate = $this->makeEmailTemplate();
-        $fakeEmailTemplate = $this->fakeEmailTemplateData();
+        $emailTemplate        = $this->makeEmailTemplate();
+        $fakeEmailTemplate    = $this->fakeEmailTemplateData();
         $updatedEmailTemplate = $this->emailTemplateRepo->update($fakeEmailTemplate, $emailTemplate->id);
         $this->assertModelData($fakeEmailTemplate, $updatedEmailTemplate->toArray());
         $dbEmailTemplate = $this->emailTemplateRepo->find($emailTemplate->id);
@@ -63,7 +69,7 @@ class EmailTemplateRepositoryTest extends TestCase
     public function testDeleteEmailTemplate()
     {
         $emailTemplate = $this->makeEmailTemplate();
-        $resp = $this->emailTemplateRepo->delete($emailTemplate->id);
+        $resp          = $this->emailTemplateRepo->delete($emailTemplate->id);
         $this->assertTrue($resp);
         $this->assertNull(EmailTemplate::find($emailTemplate->id), 'EmailTemplate should not exist in DB');
     }

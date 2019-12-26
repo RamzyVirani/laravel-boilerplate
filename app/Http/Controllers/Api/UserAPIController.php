@@ -211,7 +211,7 @@ class UserAPIController extends AppBaseController
         $user = $this->userRepository->findWithoutFail($id);
 
         if (empty($user)) {
-            return $this->sendError('User not found');
+            return $this->sendErrorWithData(['User not found']);
         }
 
         return $this->sendResponse($user->toArray(), 'User retrieved successfully');
@@ -276,7 +276,7 @@ class UserAPIController extends AppBaseController
         /** @var User $user */
         $user = $this->userRepository->findWithoutFail($id);
         if (empty($user)) {
-            return $this->sendError('User not found');
+            return $this->sendErrorWithData(['User not found']);
         }
 
         $user = $this->userRepository->updateRecord($request, $user);
@@ -335,7 +335,7 @@ class UserAPIController extends AppBaseController
         /** @var User $user */
         $user = $this->userRepository->findWithoutFail($id);
         if (empty($user)) {
-            return $this->sendError('User not found');
+            return $this->sendErrorWithData(['User not found']);
         }
 
         $this->userRepository->deleteRecord($id);

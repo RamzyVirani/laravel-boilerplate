@@ -1,7 +1,12 @@
 <?php
 
+namespace Tests\Api;
+
+use Tests\ApiTestTrait;
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\Traits\MakeLanguageTrait;
 
 class LanguageApiTest extends TestCase
 {
@@ -24,7 +29,7 @@ class LanguageApiTest extends TestCase
     public function testReadLanguage()
     {
         $language = $this->makeLanguage();
-        $this->json('GET', '/api/v1/languages/'.$language->id);
+        $this->json('GET', '/api/v1/languages/' . $language->id);
 
         $this->assertApiResponse($language->toArray());
     }
@@ -34,10 +39,10 @@ class LanguageApiTest extends TestCase
      */
     public function testUpdateLanguage()
     {
-        $language = $this->makeLanguage();
+        $language       = $this->makeLanguage();
         $editedLanguage = $this->fakeLanguageData();
 
-        $this->json('PUT', '/api/v1/languages/'.$language->id, $editedLanguage);
+        $this->json('PUT', '/api/v1/languages/' . $language->id, $editedLanguage);
 
         $this->assertApiResponse($editedLanguage);
     }
@@ -48,10 +53,10 @@ class LanguageApiTest extends TestCase
     public function testDeleteLanguage()
     {
         $language = $this->makeLanguage();
-        $this->json('DELETE', '/api/v1/languages/'.$language->id);
+        $this->json('DELETE', '/api/v1/languages/' . $language->id);
 
         $this->assertApiSuccess();
-        $this->json('GET', '/api/v1/languages/'.$language->id);
+        $this->json('GET', '/api/v1/languages/' . $language->id);
 
         $this->assertResponseStatus(404);
     }

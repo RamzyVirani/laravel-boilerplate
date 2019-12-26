@@ -198,7 +198,7 @@ class RoleAPIController extends AppBaseController
         $role = $this->roleRepository->findWithoutFail($id);
 
         if (empty($role)) {
-            return $this->sendError('Role not found');
+            return $this->sendErrorWithData(['Role not found']);
         }
 
         return $this->sendResponse($role->toArray(), 'Role retrieved successfully');
@@ -266,7 +266,7 @@ class RoleAPIController extends AppBaseController
         $role = $this->roleRepository->findWithoutFail($id);
 
         if (empty($role)) {
-            return $this->sendError('Role not found');
+            return $this->sendErrorWithData(['Role not found']);
         }
 
         $role = $this->roleRepository->update($input, $id);
@@ -326,7 +326,7 @@ class RoleAPIController extends AppBaseController
         $role = $this->roleRepository->findWithoutFail($id);
 
         if (empty($role)) {
-            return $this->sendError('Role not found');
+            return $this->sendErrorWithData(['Role not found']);
         }
 
         $role->delete();

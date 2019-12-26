@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Traits;
+
+use \App;
 use Faker\Factory as Faker;
 use App\Models\Page;
 use App\Repositories\Admin\PageRepository;
@@ -16,7 +19,7 @@ trait MakePageTrait
     {
         /** @var PageRepository $pageRepo */
         $pageRepo = App::make(PageRepository::class);
-        $theme = $this->fakePageData($pageFields);
+        $theme    = $this->fakePageData($pageFields);
         return $pageRepo->create($theme);
     }
 
@@ -42,11 +45,11 @@ trait MakePageTrait
         $fake = Faker::create();
 
         return array_merge([
-            'slug' => $fake->word,
-            'status' => $fake->word,
-            'created_at' => $fake->date('Y-m-d H:i:s'),
-            'updated_at' => $fake->date('Y-m-d H:i:s'),
-            'deleted_at' => $fake->date('Y-m-d H:i:s')
+            'slug'   => $fake->word,
+            'status' => $fake->numberBetween(0, 1),
+//            'created_at' => $fake->date('Y-m-d H:i:s'),
+//            'updated_at' => $fake->date('Y-m-d H:i:s'),
+//            'deleted_at' => $fake->date('Y-m-d H:i:s')
         ], $pageFields);
     }
 }

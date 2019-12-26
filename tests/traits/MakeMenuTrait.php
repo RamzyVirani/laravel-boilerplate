@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Traits;
+
+use \App;
 use Faker\Factory as Faker;
 use App\Models\Menu;
 use App\Repositories\Admin\MenuRepository;
@@ -16,7 +19,7 @@ trait MakeMenuTrait
     {
         /** @var MenuRepository $menuRepo */
         $menuRepo = App::make(MenuRepository::class);
-        $theme = $this->fakeMenuData($menuFields);
+        $theme    = $this->fakeMenuData($menuFields);
         return $menuRepo->create($theme);
     }
 
@@ -42,15 +45,15 @@ trait MakeMenuTrait
         $fake = Faker::create();
 
         return array_merge([
-            'name' => $fake->word,
-            'icon' => $fake->word,
-            'slug' => $fake->word,
-            'position' => $fake->word,
-            'is_protected' => $fake->word,
-            'status' => $fake->word,
-            'created_at' => $fake->date('Y-m-d H:i:s'),
-            'updated_at' => $fake->date('Y-m-d H:i:s'),
-            'deleted_at' => $fake->date('Y-m-d H:i:s')
+            'name'         => $fake->word,
+//            'icon'         => $fake->word,
+            'slug'         => $fake->slug,
+            'position'     => $fake->numberBetween(0, 13),
+            'is_protected' => $fake->numberBetween(0, 1),
+            'status'       => $fake->numberBetween(0, 1),
+//            'created_at'   => $fake->date('Y-m-d H:i:s'),
+//            'updated_at'   => $fake->date('Y-m-d H:i:s'),
+//            'deleted_at'   => $fake->date('Y-m-d H:i:s')
         ], $menuFields);
     }
 }

@@ -210,7 +210,7 @@ class SettingAPIController extends AppBaseController
         $setting = $this->settingRepository->findWithoutFail($id);
 
         if (empty($setting)) {
-            return $this->sendError('Setting not found');
+            return $this->sendErrorWithData(['Setting not found']);
         }
 
         return $this->sendResponse($setting->toArray(), 'Setting retrieved successfully');
@@ -276,7 +276,7 @@ class SettingAPIController extends AppBaseController
         $setting = $this->settingRepository->findWithoutFail($id);
 
         if (empty($setting)) {
-            return $this->sendError('Setting not found');
+            return $this->sendErrorWithData(['Setting not found']);
         }
 
         $setting = $this->settingRepository->updateRecord($request, $id);
@@ -336,7 +336,7 @@ class SettingAPIController extends AppBaseController
         $setting = $this->settingRepository->findWithoutFail($id);
 
         if (empty($setting)) {
-            return $this->sendError('Setting not found');
+            return $this->sendErrorWithData(['Setting not found']);
         }
 
         $this->settingRepository->deleteRecord($id);

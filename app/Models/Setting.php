@@ -99,9 +99,9 @@ class Setting extends Model
 
     public $table = 'settings';
 
-    protected $dates = ['deleted_at'];
-    public $translatedAttributes = ['title', 'address', 'about'];
-    protected $cascadeDeletes = ['translations'];
+    protected $dates                = ['deleted_at'];
+    public    $translatedAttributes = ['title', 'address', 'about'];
+    protected $cascadeDeletes       = ['translations'];
 
     public $fillable = [
         'default_language',
@@ -202,7 +202,7 @@ class Setting extends Model
     public static $api_rules = [
         'default_language' => 'required|exists:locales,code',
         'email'            => 'required|email',
-        'logo'             => 'required|image|mimetypes:jgp,jgep,png',
+        'logo'             => 'sometimes|image|mimetypes:jgp,jgep,png',
         'phone'            => 'required',
         'latitude'         => 'required',
         'longitude'        => 'required',
@@ -221,7 +221,7 @@ class Setting extends Model
     public static $api_update_rules = [
         'default_language' => 'required|exists:locales,code',
         'email'            => 'required|email',
-        'logo'             => 'required',
+        'logo'             => 'sometimes',
         'phone'            => 'required',
         'latitude'         => 'required',
         'longitude'        => 'required',

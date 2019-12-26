@@ -1,8 +1,14 @@
 <?php
 
+namespace Tests\Repository;
+
+use \App;
+use Tests\ApiTestTrait;
+use Tests\TestCase;
 use App\Models\Menu;
 use App\Repositories\Admin\MenuRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\Traits\MakeMenuTrait;
 
 class MenuRepositoryTest extends TestCase
 {
@@ -24,7 +30,7 @@ class MenuRepositoryTest extends TestCase
      */
     public function testCreateMenu()
     {
-        $menu = $this->fakeMenuData();
+        $menu        = $this->fakeMenuData();
         $createdMenu = $this->menuRepo->create($menu);
         $createdMenu = $createdMenu->toArray();
         $this->assertArrayHasKey('id', $createdMenu);
@@ -38,7 +44,7 @@ class MenuRepositoryTest extends TestCase
      */
     public function testReadMenu()
     {
-        $menu = $this->makeMenu();
+        $menu   = $this->makeMenu();
         $dbMenu = $this->menuRepo->find($menu->id);
         $dbMenu = $dbMenu->toArray();
         $this->assertModelData($menu->toArray(), $dbMenu);
@@ -49,8 +55,8 @@ class MenuRepositoryTest extends TestCase
      */
     public function testUpdateMenu()
     {
-        $menu = $this->makeMenu();
-        $fakeMenu = $this->fakeMenuData();
+        $menu        = $this->makeMenu();
+        $fakeMenu    = $this->fakeMenuData();
         $updatedMenu = $this->menuRepo->update($fakeMenu, $menu->id);
         $this->assertModelData($fakeMenu, $updatedMenu->toArray());
         $dbMenu = $this->menuRepo->find($menu->id);

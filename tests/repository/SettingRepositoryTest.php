@@ -1,8 +1,14 @@
 <?php
 
+namespace Tests\Repository;
+
+use \App;
+use Tests\ApiTestTrait;
+use Tests\TestCase;
 use App\Models\Setting;
 use App\Repositories\Admin\SettingRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\Traits\MakeSettingTrait;
 
 class SettingRepositoryTest extends TestCase
 {
@@ -24,7 +30,7 @@ class SettingRepositoryTest extends TestCase
      */
     public function testCreateSetting()
     {
-        $setting = $this->fakeSettingData();
+        $setting        = $this->fakeSettingData();
         $createdSetting = $this->settingRepo->create($setting);
         $createdSetting = $createdSetting->toArray();
         $this->assertArrayHasKey('id', $createdSetting);
@@ -38,7 +44,7 @@ class SettingRepositoryTest extends TestCase
      */
     public function testReadSetting()
     {
-        $setting = $this->makeSetting();
+        $setting   = $this->makeSetting();
         $dbSetting = $this->settingRepo->find($setting->id);
         $dbSetting = $dbSetting->toArray();
         $this->assertModelData($setting->toArray(), $dbSetting);
@@ -49,8 +55,8 @@ class SettingRepositoryTest extends TestCase
      */
     public function testUpdateSetting()
     {
-        $setting = $this->makeSetting();
-        $fakeSetting = $this->fakeSettingData();
+        $setting        = $this->makeSetting();
+        $fakeSetting    = $this->fakeSettingData();
         $updatedSetting = $this->settingRepo->update($fakeSetting, $setting->id);
         $this->assertModelData($fakeSetting, $updatedSetting->toArray());
         $dbSetting = $this->settingRepo->find($setting->id);
@@ -63,7 +69,7 @@ class SettingRepositoryTest extends TestCase
     public function testDeleteSetting()
     {
         $setting = $this->makeSetting();
-        $resp = $this->settingRepo->delete($setting->id);
+        $resp    = $this->settingRepo->delete($setting->id);
         $this->assertTrue($resp);
         $this->assertNull(Setting::find($setting->id), 'Setting should not exist in DB');
     }

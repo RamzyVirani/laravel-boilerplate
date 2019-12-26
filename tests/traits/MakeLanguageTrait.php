@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Traits;
+
+use \App;
 use Faker\Factory as Faker;
 use App\Models\Language;
 use App\Repositories\Admin\LanguageRepository;
@@ -16,7 +19,7 @@ trait MakeLanguageTrait
     {
         /** @var LanguageRepository $languageRepo */
         $languageRepo = App::make(LanguageRepository::class);
-        $theme = $this->fakeLanguageData($languageFields);
+        $theme        = $this->fakeLanguageData($languageFields);
         return $languageRepo->create($theme);
     }
 
@@ -42,14 +45,14 @@ trait MakeLanguageTrait
         $fake = Faker::create();
 
         return array_merge([
-            'code' => $fake->word,
-            'title' => $fake->word,
+            'code'        => $fake->languageCode,
+            'title'       => $fake->word,
             'native_name' => $fake->word,
-            'direction' => $fake->word,
-            'status' => $fake->word,
-            'created_at' => $fake->date('Y-m-d H:i:s'),
-            'updated_at' => $fake->date('Y-m-d H:i:s'),
-            'deleted_at' => $fake->date('Y-m-d H:i:s')
+            'direction'   => $fake->randomElement(['ltr', 'rtl']),
+            'status'      => $fake->numberBetween(0, 1),
+//            'created_at'  => $fake->date('Y-m-d H:i:s'),
+//            'updated_at'  => $fake->date('Y-m-d H:i:s'),
+//            'deleted_at'  => $fake->date('Y-m-d H:i:s')
         ], $languageFields);
     }
 }

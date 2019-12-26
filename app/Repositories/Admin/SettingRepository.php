@@ -44,10 +44,12 @@ class SettingRepository extends BaseRepository
      */
     public function saveRecord($request)
     {
-        $input = $request->only(['socialName', 'socialLink', 'logo', 'default_locale', 'email', 'phone', 'latitude', 'longitude', 'playstore', 'appstore', 'social_links', 'force_update', 'app_version']);
+        $input = $request->only(['socialName', 'socialLink', 'logo', 'default_language', 'email', 'phone', 'latitude', 'longitude', 'playstore', 'appstore', 'social_links', 'force_update', 'app_version']);
 
-        $input['socialName'] = array_values(array_filter($input['socialName']));
-        $input['socialLink'] = array_values(array_filter($input['socialLink']));
+        if (isset($input['socialLink']) && isset($input['socialName'])) {
+            $input['socialName'] = array_values(array_filter($input['socialName']));
+            $input['socialLink'] = array_values(array_filter($input['socialLink']));
+        }
 
         if (!empty($input['socialName'])) {
             foreach ($input['socialName'] as $key => $item) {
@@ -58,7 +60,7 @@ class SettingRepository extends BaseRepository
         }
 
         if ($request->hasFile('logo')) {
-            $file = $request->file('logo');
+            $file          = $request->file('logo');
             $input['logo'] = Storage::putFile('public', $file);
         }
 
@@ -73,11 +75,12 @@ class SettingRepository extends BaseRepository
      */
     public function updateRecord($request, $setting)
     {
-        $input = $request->only(['socialName', 'socialLink', 'logo', 'default_locale', 'email', 'phone', 'latitude', 'longitude', 'playstore', 'appstore', 'social_links', 'force_update', 'app_version']);
+        $input = $request->only(['socialName', 'socialLink', 'logo', 'default_language', 'email', 'phone', 'latitude', 'longitude', 'playstore', 'appstore', 'social_links', 'force_update', 'app_version']);
 
-        $input['socialName'] = array_values(array_filter($input['socialName']));
-        $input['socialLink'] = array_values(array_filter($input['socialLink']));
-
+        if (isset($input['socialName']) && isset($input['socialLink'])) {
+            $input['socialName'] = array_values(array_filter($input['socialName']));
+            $input['socialLink'] = array_values(array_filter($input['socialLink']));
+        }
         if (!empty($input['socialName'])) {
             foreach ($input['socialName'] as $key => $item) {
                 $socialAccounts[][$item] = $input['socialLink'][$key];
@@ -87,7 +90,7 @@ class SettingRepository extends BaseRepository
         }
 
         if ($request->hasFile('logo')) {
-            $file = $request->file('logo');
+            $file          = $request->file('logo');
             $input['logo'] = Storage::putFile('public', $file);
         }
 

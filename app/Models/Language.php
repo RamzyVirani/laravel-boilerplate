@@ -52,10 +52,10 @@ class Language extends Model
 {
     use SoftDeletes;
 
-    public $table = 'locales';
+    public    $table = 'locales';
     protected $dates = ['deleted_at'];
 
-    protected $primaryKey = 'code';
+//    protected $primaryKey = 'id';
 
     public $fillable = [
         'code',

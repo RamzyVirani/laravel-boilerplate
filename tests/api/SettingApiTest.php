@@ -1,7 +1,12 @@
 <?php
 
+namespace Tests\Api;
+
+use Tests\ApiTestTrait;
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\Traits\MakeSettingTrait;
 
 class SettingApiTest extends TestCase
 {
@@ -24,7 +29,7 @@ class SettingApiTest extends TestCase
     public function testReadSetting()
     {
         $setting = $this->makeSetting();
-        $this->json('GET', '/api/v1/settings/'.$setting->id);
+        $this->json('GET', '/api/v1/settings/' . $setting->id);
 
         $this->assertApiResponse($setting->toArray());
     }
@@ -34,10 +39,10 @@ class SettingApiTest extends TestCase
      */
     public function testUpdateSetting()
     {
-        $setting = $this->makeSetting();
+        $setting       = $this->makeSetting();
         $editedSetting = $this->fakeSettingData();
 
-        $this->json('PUT', '/api/v1/settings/'.$setting->id, $editedSetting);
+        $this->json('PUT', '/api/v1/settings/' . $setting->id, $editedSetting);
 
         $this->assertApiResponse($editedSetting);
     }
@@ -48,10 +53,10 @@ class SettingApiTest extends TestCase
     public function testDeleteSetting()
     {
         $setting = $this->makeSetting();
-        $this->json('DELETE', '/api/v1/settings/'.$setting->id);
+        $this->json('DELETE', '/api/v1/settings/' . $setting->id);
 
         $this->assertApiSuccess();
-        $this->json('GET', '/api/v1/settings/'.$setting->id);
+        $this->json('GET', '/api/v1/settings/' . $setting->id);
 
         $this->assertResponseStatus(404);
     }

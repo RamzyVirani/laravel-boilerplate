@@ -207,7 +207,7 @@ class LanguageAPIController extends AppBaseController
     {
         $language = $this->languageRepository->findWithoutFail($id);
         if (empty($language)) {
-            return $this->sendError('Language not found');
+            return $this->sendErrorWithData(['Language not found']);
         }
 
         return $this->sendResponse($language->toArray(), 'Language retrieved successfully');
@@ -271,7 +271,7 @@ class LanguageAPIController extends AppBaseController
     {
         $language = $this->languageRepository->findWithoutFail($id);
         if (empty($language)) {
-            return $this->sendError('Language not found');
+            return $this->sendErrorWithData(['Language not found']);
         }
 
         $language = $this->languageRepository->updateRecord($request, $language);
@@ -328,7 +328,7 @@ class LanguageAPIController extends AppBaseController
     {
         $language = $this->languageRepository->findWithoutFail($id);
         if (empty($language)) {
-            return $this->sendError('Language not found');
+            return $this->sendErrorWithData(['Language not found']);
         }
 
         $this->languageRepository->deleteRecord($id);

@@ -1,7 +1,12 @@
 <?php
 
+namespace Tests\Api;
+
+use Tests\ApiTestTrait;
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\Traits\MakeEmailTemplateTrait;
 
 class EmailTemplateApiTest extends TestCase
 {
@@ -13,7 +18,7 @@ class EmailTemplateApiTest extends TestCase
     public function testCreateEmailTemplate()
     {
         $emailTemplate = $this->fakeEmailTemplateData();
-        $this->json('POST', '/api/v1/emailTemplates', $emailTemplate);
+        $this->json('POST', '/api/v1/email-templates', $emailTemplate);
 
         $this->assertApiResponse($emailTemplate);
     }
@@ -24,7 +29,7 @@ class EmailTemplateApiTest extends TestCase
     public function testReadEmailTemplate()
     {
         $emailTemplate = $this->makeEmailTemplate();
-        $this->json('GET', '/api/v1/emailTemplates/'.$emailTemplate->id);
+        $this->json('GET', '/api/v1/email-templates/' . $emailTemplate->id);
 
         $this->assertApiResponse($emailTemplate->toArray());
     }
@@ -34,10 +39,10 @@ class EmailTemplateApiTest extends TestCase
      */
     public function testUpdateEmailTemplate()
     {
-        $emailTemplate = $this->makeEmailTemplate();
+        $emailTemplate       = $this->makeEmailTemplate();
         $editedEmailTemplate = $this->fakeEmailTemplateData();
 
-        $this->json('PUT', '/api/v1/emailTemplates/'.$emailTemplate->id, $editedEmailTemplate);
+        $this->json('PUT', '/api/v1/email-templates/' . $emailTemplate->id, $editedEmailTemplate);
 
         $this->assertApiResponse($editedEmailTemplate);
     }
@@ -48,10 +53,10 @@ class EmailTemplateApiTest extends TestCase
     public function testDeleteEmailTemplate()
     {
         $emailTemplate = $this->makeEmailTemplate();
-        $this->json('DELETE', '/api/v1/emailTemplates/'.$emailTemplate->id);
+        $this->json('DELETE', '/api/v1/email-templates/' . $emailTemplate->id);
 
         $this->assertApiSuccess();
-        $this->json('GET', '/api/v1/emailTemplates/'.$emailTemplate->id);
+        $this->json('GET', '/api/v1/email-templates/' . $emailTemplate->id);
 
         $this->assertResponseStatus(404);
     }

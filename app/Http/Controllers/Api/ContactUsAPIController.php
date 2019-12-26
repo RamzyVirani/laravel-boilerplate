@@ -207,7 +207,7 @@ class ContactUsAPIController extends AppBaseController
     {
         $contactUs = $this->contactUsRepository->findWithoutFail($id);
         if (empty($contactUs)) {
-            return $this->sendError('Contact Us not found');
+            return $this->sendErrorWithData(['Contact Us not found']);
         }
 
         return $this->sendResponse($contactUs->toArray(), 'Contact Us retrieved successfully');
@@ -272,7 +272,7 @@ class ContactUsAPIController extends AppBaseController
         /** @var ContactUs $contactUs */
         $contactUs = $this->contactUsRepository->findWithoutFail($id);
         if (empty($contactUs)) {
-            return $this->sendError('Contact Us not found');
+            return $this->sendErrorWithData(['Contact Us not found']);
         }
 
         $contactUs = $this->contactUsRepository->updateRecord($request, $id);
@@ -329,7 +329,7 @@ class ContactUsAPIController extends AppBaseController
     {
         $contactUs = $this->contactUsRepository->findWithoutFail($id);
         if (empty($contactUs)) {
-            return $this->sendError('Contact Us not found');
+            return $this->sendErrorWithData(['Contact Us not found']);
         }
 
         $this->contactUsRepository->deleteRecord($id);

@@ -16,7 +16,6 @@ use Illuminate\Http\Response;
  * Class EmailTemplateController
  * @package App\Http\Controllers\Api
  */
-
 class EmailTemplateAPIController extends AppBaseController
 {
     /** @var  EmailTemplateRepository */
@@ -211,7 +210,7 @@ class EmailTemplateAPIController extends AppBaseController
         $emailTemplate = $this->emailTemplateRepository->findWithoutFail($id);
 
         if (empty($emailTemplate)) {
-            return $this->sendError('Email Template not found');
+            return $this->sendErrorWithData(['Email Template not found']);
         }
 
         return $this->sendResponse($emailTemplate->toArray(), 'Email Template retrieved successfully');
@@ -277,10 +276,10 @@ class EmailTemplateAPIController extends AppBaseController
         $emailTemplate = $this->emailTemplateRepository->findWithoutFail($id);
 
         if (empty($emailTemplate)) {
-            return $this->sendError('Email Template not found');
+            return $this->sendErrorWithData(['Email Template not found']);
         }
 
-        $emailTemplate = $this->emailTemplateRepository->updateRecord($request, $id);
+        $emailTemplate = $this->emailTemplateRepository->updateRecord($request, $emailTemplate);
 
         return $this->sendResponse($emailTemplate->toArray(), 'EmailTemplate updated successfully');
     }
@@ -337,7 +336,7 @@ class EmailTemplateAPIController extends AppBaseController
         $emailTemplate = $this->emailTemplateRepository->findWithoutFail($id);
 
         if (empty($emailTemplate)) {
-            return $this->sendError('Email Template not found');
+            return $this->sendErrorWithData(['Email Template not found']);
         }
 
         $this->emailTemplateRepository->deleteRecord($id);

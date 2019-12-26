@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Traits;
+
+use \App;
 use Faker\Factory as Faker;
 use App\Models\ContactUs;
 use App\Repositories\Admin\ContactUsRepository;
@@ -16,7 +19,7 @@ trait MakeContactUsTrait
     {
         /** @var ContactUsRepository $contactUsRepo */
         $contactUsRepo = App::make(ContactUsRepository::class);
-        $theme = $this->fakeContactUsData($contactUsFields);
+        $theme         = $this->fakeContactUsData($contactUsFields);
         return $contactUsRepo->create($theme);
     }
 
@@ -42,11 +45,11 @@ trait MakeContactUsTrait
         $fake = Faker::create();
 
         return array_merge([
-            'title' => $fake->word,
+            'title'   => $fake->word,
             'message' => $fake->text,
-            'created_at' => $fake->date('Y-m-d H:i:s'),
-            'updated_at' => $fake->date('Y-m-d H:i:s'),
-            'deleted_at' => $fake->date('Y-m-d H:i:s')
+//            'created_at' => $fake->date('Y-m-d H:i:s'),
+//            'updated_at' => $fake->date('Y-m-d H:i:s'),
+//            'deleted_at' => $fake->date('Y-m-d H:i:s')
         ], $contactUsFields);
     }
 }

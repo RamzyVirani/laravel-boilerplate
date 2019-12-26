@@ -1,7 +1,12 @@
 <?php
 
+namespace Tests\Api;
+
+use Tests\ApiTestTrait;
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\Traits\MakePageTrait;
 
 class PageApiTest extends TestCase
 {
@@ -24,7 +29,7 @@ class PageApiTest extends TestCase
     public function testReadPage()
     {
         $page = $this->makePage();
-        $this->json('GET', '/api/v1/pages/'.$page->id);
+        $this->json('GET', '/api/v1/pages/' . $page->id);
 
         $this->assertApiResponse($page->toArray());
     }
@@ -34,10 +39,10 @@ class PageApiTest extends TestCase
      */
     public function testUpdatePage()
     {
-        $page = $this->makePage();
+        $page       = $this->makePage();
         $editedPage = $this->fakePageData();
 
-        $this->json('PUT', '/api/v1/pages/'.$page->id, $editedPage);
+        $this->json('PUT', '/api/v1/pages/' . $page->id, $editedPage);
 
         $this->assertApiResponse($editedPage);
     }
@@ -48,10 +53,10 @@ class PageApiTest extends TestCase
     public function testDeletePage()
     {
         $page = $this->makePage();
-        $this->json('DELETE', '/api/v1/pages/'.$page->id);
+        $this->json('DELETE', '/api/v1/pages/' . $page->id);
 
         $this->assertApiSuccess();
-        $this->json('GET', '/api/v1/pages/'.$page->id);
+        $this->json('GET', '/api/v1/pages/' . $page->id);
 
         $this->assertResponseStatus(404);
     }

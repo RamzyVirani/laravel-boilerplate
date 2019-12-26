@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Traits;
+
+use \App;
 use Faker\Factory as Faker;
 use App\Models\EmailTemplate;
 use App\Repositories\Admin\EmailTemplateRepository;
@@ -16,7 +19,7 @@ trait MakeEmailTemplateTrait
     {
         /** @var EmailTemplateRepository $emailTemplateRepo */
         $emailTemplateRepo = App::make(EmailTemplateRepository::class);
-        $theme = $this->fakeEmailTemplateData($emailTemplateFields);
+        $theme             = $this->fakeEmailTemplateData($emailTemplateFields);
         return $emailTemplateRepo->create($theme);
     }
 
@@ -42,12 +45,12 @@ trait MakeEmailTemplateTrait
         $fake = Faker::create();
 
         return array_merge([
-            'key' => $fake->word,
+            'key'       => $fake->word,
             'html_body' => $fake->text,
             'text_body' => $fake->text,
-            'created_at' => $fake->date('Y-m-d H:i:s'),
-            'updated_at' => $fake->date('Y-m-d H:i:s'),
-            'deleted_at' => $fake->date('Y-m-d H:i:s')
+//            'created_at' => $fake->date('Y-m-d H:i:s'),
+//            'updated_at' => $fake->date('Y-m-d H:i:s'),
+//            'deleted_at' => $fake->date('Y-m-d H:i:s')
         ], $emailTemplateFields);
     }
 }

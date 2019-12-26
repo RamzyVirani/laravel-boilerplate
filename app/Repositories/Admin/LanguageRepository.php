@@ -38,19 +38,19 @@ class LanguageRepository extends BaseRepository
 
     public function saveRecord($request)
     {
-        $input = $request->all();
+        $input    = $request->all();
         $language = $this->create($input);
         return $language;
     }
 
-   public function updateRecord($request, $language)
+    public function updateRecord($request, $language)
     {
-        $input = $request->all();
+        $input           = $request->all();
         $input['status'] = isset($input['status']) ? $input['status'] : 0;
 
         if ($language->code == 'en') // as english is default locale, cannot disable this
             $input['status'] = 1;
-        $language = $this->update($input, $language->code);
+        $language = $this->update($input, $language->id);
         return $language;
     }
 

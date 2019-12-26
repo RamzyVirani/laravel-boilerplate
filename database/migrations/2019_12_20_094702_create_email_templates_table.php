@@ -18,7 +18,6 @@ class CreateEmailTemplatesTable extends Migration
             $table->string('key', 255);
             $table->text('html_body', 65535);
             $table->text('text_body', 65535);
-            $table->datetime('deleted_at');
             $table->timestamps();
             $table->softDeletes();
         });

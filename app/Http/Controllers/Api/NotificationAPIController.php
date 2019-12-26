@@ -209,7 +209,7 @@ class NotificationAPIController extends AppBaseController
     {
         $notification = $this->notificationRepository->findWithoutFail($id);
         if (empty($notification)) {
-            return $this->sendError('Notification not found');
+            return $this->sendErrorWithData(['Notification not found']);
         }
 
         return $this->sendResponse($notification->toArray(), 'Notification retrieved successfully');
@@ -276,7 +276,7 @@ class NotificationAPIController extends AppBaseController
         /** @var Notification $notification */
         $notification = $this->notificationRepository->findWithoutFail($id);
         if (empty($notification)) {
-            return $this->sendError('Notification not found');
+            return $this->sendErrorWithData(['Notification not found']);
         }
 
         $notification = $this->notificationRepository->update($input, $id);
@@ -335,7 +335,7 @@ class NotificationAPIController extends AppBaseController
     {
         $notification = $this->notificationRepository->findWithoutFail($id);
         if (empty($notification)) {
-            return $this->sendError('Notification not found');
+            return $this->sendErrorWithData(['Notification not found']);
         }
 
         $notification->delete();

@@ -194,7 +194,7 @@ class MenuAPIController extends AppBaseController
     {
         $menu = $this->menuRepository->findWithoutFail($id);
         if (empty($menu)) {
-            return $this->sendError('Menu not found');
+            return $this->sendErrorWithData(['Menu not found']);
         }
 
         return $this->sendResponse($menu->toArray(), 'Menu retrieved successfully');
@@ -257,9 +257,9 @@ class MenuAPIController extends AppBaseController
     public function update($id, Request $request)
     {
         $input = $request->all();
-        $menu = $this->menuRepository->findWithoutFail($id);
+        $menu  = $this->menuRepository->findWithoutFail($id);
         if (empty($menu)) {
-            return $this->sendError('Menu not found');
+            return $this->sendErrorWithData(['Menu not found']);
         }
 
         $menu = $this->menuRepository->updateRecord($request);
@@ -318,7 +318,7 @@ class MenuAPIController extends AppBaseController
     {
         $menu = $this->menuRepository->findWithoutFail($id);
         if (empty($menu)) {
-            return $this->sendError('Menu not found');
+            return $this->sendErrorWithData(['Menu not found']);
         }
 
         $menu->delete();
