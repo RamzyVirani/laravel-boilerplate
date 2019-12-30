@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
+use Illuminate\Contracts\aValidation\Factory;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\Facades\Response;
@@ -14,6 +15,27 @@ use InfyOm\Generator\Utils\ResponseUtil;
  */
 class BaseAPIRequest extends FormRequest
 {
+
+    /**
+     * @param Factory $factory
+     * @return Validator
+     */
+    public function validator(Factory $factory)
+    {
+        /*
+        // Use it like 'name' => 'required|custom_validation:arg1,arg2,arg3'
+        Validator::extend('custom_validation', function ($attribute, $value, $params) {
+            // $attribute will contain field name, i.e. name
+            // $value will contain the value in the $attribute/name
+            // $parameters will be an array of arguments passed
+            // i.e. [0] => arg1, [1] => arg2, [2] => arg3 and so on
+            // return true for valid and false for invalid
+            return true;
+        });
+        */
+        return $this->createDefaultValidator($factory);
+    }
+
     /**
      * @param string $message
      * @param array $data

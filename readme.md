@@ -7,7 +7,7 @@ PS: This boilerplate works on Database First Approach, After the installation, y
 ## Whats used?
 
 - **PHP 7.1** 
-- **Laravel 5.6**
+- **Laravel 5.8**
 - InfyOm Laravel Generator
 - AdminLTE Theme
 - Swagger Generator from InfyOm
@@ -16,10 +16,10 @@ PS: This boilerplate works on Database First Approach, After the installation, y
 - Repository Pattern
 
 ## Libraries
-**Laravel 5.6**
-- laravel/framework: 5.6.*,
+**Laravel 5.8**
+- laravel/framework: 5.8.*,
 - laravel/tinker: ^1.0,
-- laravelcollective/html: ^5.6.0,
+- laravelcollective/html: ^5.8.0,
 - fideloper/proxy: ^4.0,
 - doctrine/dbal: ~2.3
 
@@ -42,11 +42,11 @@ PS: This boilerplate works on Database First Approach, After the installation, y
 - iatstuti/laravel-cascade-soft-deletes: ^1.4.0,
 
 **InfyOm (with AdminLTE Template and DataTables)**
-- infyomlabs/adminlte-templates: 5.6.x-dev,
-- infyomlabs/laravel-generator: 5.6.x-dev#7bd3981,
+- infyomlabs/adminlte-templates: 5.8.x-dev,
+- infyomlabs/laravel-generator: 5.8.x-dev,
 - infyomlabs/swagger-generator: dev-master,
-- yajra/laravel-datatables-buttons: 3.*,
-- yajra/laravel-datatables-oracle: ~8.0,
+- yajra/laravel-datatables-buttons: 4.*,
+- yajra/laravel-datatables-oracle: ~9.0,
 
 **Push Notification**
 - edujugon/push-notification: ^2.2,
@@ -129,6 +129,9 @@ Boilerplate will create tables and insert basic modules, menus, users, roles, pe
 
 **Make dependent dropdowns**
 - Use class="select2" and data-url="route_to_fetch_data" data-depends="parent_name"
+
+**Create Custom Validation Rules**
+- /app/Http/Requests/Api/BaseApiRequest::validator has a sample custom validation rule. Uncomment and modify that code to create and use your custom validation rule for any API request.
 
 
 **_PS: Download the zip of this project to initialize git for your project repository_**
