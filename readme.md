@@ -55,7 +55,7 @@ PS: This boilerplate works on Database First Approach, After the installation, y
 - zizaco/entrust: 1.9.1
 
 ## Installation
-- Download the zip of this repository
+- Download the zip of this repository or use `composer create-project ramzyvirani/laravel-boilerplate`
 - Upload it on Web Server
 - Install & Update libraries with `composer update`
 - Set your Database credentials in `.env`.

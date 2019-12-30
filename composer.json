@@ -1,9 +1,16 @@
 {
-  "name": "laravel/laravel",
-  "description": "The Laravel Framework.",
+  "name": "ramzyvirani/laravel-boilerplate",
+  "description": "Laravel boilerplate. Basic boilerplate to create laravel projects with Admin Panel, Role Based Access Control, i18n support, Swagger Doc using InfyOm (Laravel CRUD Generator).",
   "keywords": [
     "framework",
-    "laravel"
+    "laravel",
+    "admin-panel",
+    "adminlte",
+    "rbac",
+    "i18n",
+    "swagger",
+    "scaffolding",
+    "boilerplate"
   ],
   "license": "MIT",
   "type": "project",
