@@ -104,7 +104,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     public static $rules = [
-        'name'            => 'required',
+        'name'                  => 'required',
         'image'                 => 'sometimes|image', // |mimes:jpg,png
         'roles'                 => 'required',
         'email'                 => 'required|email|unique:users,email',
@@ -197,5 +197,26 @@ class User extends Authenticatable implements JWTSubject
     public function socialAccounts()
     {
         return $this->hasMany(SocialAccount::class);
+    }
+
+    public function scopeWithRoleId($query, $role)
+    {
+        return $query->whereHas('roles', function ($q) use ($role) {
+            return $q->where('id', $role);
+        });
+    }
+
+    public function scopeFirstNameLike($query, $search)
+    {
+        return $query->whereHas('details', function ($q) use ($search) {
+            return $q->where('first_name', 'like', $search);
+        });
+    }
+
+    public function scopeWithDeviceType($query, $deviceType)
+    {
+        return $query->whereHas('devices', function ($q) use ($deviceType) {
+            return $q->where('device_type', $deviceType);
+        });
     }
 }

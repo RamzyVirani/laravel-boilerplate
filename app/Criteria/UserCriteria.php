@@ -39,9 +39,7 @@ class UserCriteria extends BaseCriteria implements CriteriaInterface
         if ($this->isset('role')) {
             // If Role Property is set, add a condition to include only those users who have this role
             $role  = $this->role;
-            $model = $model->whereHas('roles', function ($q) use ($role) {
-                return $q->where('id', $role);
-            });
+            $model = $model->withRoleId($role);
         }
 
 
@@ -72,9 +70,7 @@ class UserCriteria extends BaseCriteria implements CriteriaInterface
             } else {
                 // If only query property is set and location properties are not set
                 // then we would only add like query
-                $model = $model->whereHas('details', function ($q) use ($query) {
-                    return $q->where('first_name', 'like', $query);
-                });
+                $model = $model->firstNameLike($query);
             }
         } else if ($this->isset('latitude') && $this->isset('longitude')) {
             // else if query property is not set and location properties are set
@@ -96,9 +92,7 @@ class UserCriteria extends BaseCriteria implements CriteriaInterface
             // If Device Type Property is set, add a condition to include only those users who have this device type
             $device_type = $this->device_type;
 
-            $model = $model->whereHas('devices', function ($q) use ($device_type) {
-                return $q->where('device_type', $device_type);
-            });
+            $model = $model->withDeviceType($device_type);
         }
 
         if ($this->isset('graph')) {
