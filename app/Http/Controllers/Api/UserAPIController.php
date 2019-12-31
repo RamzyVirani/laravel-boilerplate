@@ -98,9 +98,10 @@ class UserAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->userRepository->pushCriteria(new RequestCriteria($request));
-        $this->userRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $users = $this->userRepository->all();
+        $users = $this->userRepository
+            ->pushCriteria(new RequestCriteria($request))
+            ->pushCriteria(new LimitOffsetCriteria($request))
+            ->all();
 
         return $this->sendResponse($users->toArray(), 'Users retrieved successfully');
     }

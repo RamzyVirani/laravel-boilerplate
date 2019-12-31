@@ -98,9 +98,10 @@ class SettingAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->settingRepository->pushCriteria(new RequestCriteria($request));
-        $this->settingRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $settings = $this->settingRepository->all();
+        $settings = $this->settingRepository
+            ->pushCriteria(new RequestCriteria($request))
+            ->pushCriteria(new LimitOffsetCriteria($request))
+            ->all();
 
         return $this->sendResponse($settings->toArray(), 'Settings retrieved successfully');
     }

@@ -98,9 +98,10 @@ class LanguageAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->languageRepository->pushCriteria(new RequestCriteria($request));
-        $this->languageRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $languages = $this->languageRepository->all();
+        $languages = $this->languageRepository
+            ->pushCriteria(new RequestCriteria($request))
+            ->pushCriteria(new LimitOffsetCriteria($request))
+            ->all();
 
         return $this->sendResponse($languages->toArray(), 'Languages retrieved successfully');
     }

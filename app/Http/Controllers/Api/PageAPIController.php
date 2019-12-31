@@ -108,9 +108,10 @@ class PageAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->pageRepository->pushCriteria(new RequestCriteria($request));
-        $this->pageRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $pages = $this->pageRepository->all();
+        $pages = $this->pageRepository
+            ->pushCriteria(new RequestCriteria($request))
+            ->pushCriteria(new LimitOffsetCriteria($request))
+            ->all();
 
         return $this->sendResponse($pages->toArray(), 'Pages retrieved successfully');
     }

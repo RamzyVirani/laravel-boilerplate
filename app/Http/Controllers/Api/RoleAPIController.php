@@ -84,9 +84,10 @@ class RoleAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->roleRepository->pushCriteria(new RequestCriteria($request));
-        $this->roleRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $roles = $this->roleRepository->all();
+        $roles = $this->roleRepository
+            ->pushCriteria(new RequestCriteria($request))
+            ->pushCriteria(new LimitOffsetCriteria($request))
+            ->all();
 
         return $this->sendResponse($roles->toArray(), 'Roles retrieved successfully');
     }

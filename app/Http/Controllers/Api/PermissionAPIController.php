@@ -79,9 +79,10 @@ class PermissionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->permissionRepository->pushCriteria(new RequestCriteria($request));
-        $this->permissionRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $permissions = $this->permissionRepository->all();
+        $permissions = $this->permissionRepository
+            ->pushCriteria(new RequestCriteria($request))
+            ->pushCriteria(new LimitOffsetCriteria($request))
+            ->all();
 
         return $this->sendResponse($permissions->toArray(), 'Permissions retrieved successfully');
     }

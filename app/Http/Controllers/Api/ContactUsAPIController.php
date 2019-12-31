@@ -98,9 +98,10 @@ class ContactUsAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->contactUsRepository->pushCriteria(new RequestCriteria($request));
-        $this->contactUsRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $contactus = $this->contactUsRepository->all();
+        $contactus = $this->contactUsRepository
+            ->pushCriteria(new RequestCriteria($request))
+            ->pushCriteria(new LimitOffsetCriteria($request))
+            ->all();
 
         return $this->sendResponse($contactus->toArray(), 'Contact Us retrieved successfully');
     }

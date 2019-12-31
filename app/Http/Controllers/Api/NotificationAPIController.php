@@ -98,9 +98,10 @@ class NotificationAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->notificationRepository->pushCriteria(new RequestCriteria($request));
-        $this->notificationRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $notifications = $this->notificationRepository->all();
+        $notifications = $this->notificationRepository
+            ->pushCriteria(new RequestCriteria($request))
+            ->pushCriteria(new LimitOffsetCriteria($request))
+            ->all();
 
         return $this->sendResponse($notifications->toArray(), 'Notifications retrieved successfully');
     }

@@ -83,9 +83,10 @@ class MenuAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->menuRepository->pushCriteria(new RequestCriteria($request));
-        $this->menuRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $menus = $this->menuRepository->all();
+        $menus = $this->menuRepository
+            ->pushCriteria(new RequestCriteria($request))
+            ->pushCriteria(new LimitOffsetCriteria($request))
+            ->all();
 
         return $this->sendResponse($menus->toArray(), 'Menus retrieved successfully');
     }

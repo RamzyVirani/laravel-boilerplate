@@ -98,9 +98,10 @@ class EmailTemplateAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->emailTemplateRepository->pushCriteria(new RequestCriteria($request));
-        $this->emailTemplateRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $emailTemplates = $this->emailTemplateRepository->all();
+        $emailTemplates = $this->emailTemplateRepository
+            ->pushCriteria(new RequestCriteria($request))
+            ->pushCriteria(new LimitOffsetCriteria($request))
+            ->all();
 
         return $this->sendResponse($emailTemplates->toArray(), 'Email Templates retrieved successfully');
     }
