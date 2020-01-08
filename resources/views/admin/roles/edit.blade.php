@@ -63,7 +63,7 @@
                                 @foreach($permissions[$key] as $id => $permission)
                                     @php ($checked = $role->hasPermission($permission['name']) ? true : false)
                                     <td {{ ($module->is_module == 0)?' colspan=6':'' }} class="bg-default text-center">
-                                        @if(\Auth::user()->can($permission['name']))
+                                        @if(\Auth::user()->ability("super-admin",$permission['name']))
                                             {!! Form::checkbox('permissions['.$permission["id"].']', 1, $checked, ($module->is_module == 0)?[]:['class'=>'checkbox_row_'.$row. ' checkbox_col_'.$col++]) !!}
                                         @endif
                                     </td>

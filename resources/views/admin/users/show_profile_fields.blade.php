@@ -1,4 +1,4 @@
-@if($user->hasRole('admin') || $user->hasRole('super-admin'))
+@if($user->hasRole(["super-admin",'admin']))
     <!-- Name Field -->
     <div class="form-group col-sm-6">
         {!! Form::label('name', 'Name:') !!}

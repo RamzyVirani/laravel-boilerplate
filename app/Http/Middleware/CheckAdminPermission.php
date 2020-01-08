@@ -16,7 +16,7 @@ class CheckAdminPermission
      */
     public function handle($request, Closure $next)
     {
-        $routeName = str_replace([$request->route()->action['prefix'] . '.', 'store', 'update'], ['', 'create', 'edit'], $request->route()->action['as']);
+        $routeName      = str_replace([$request->route()->action['prefix'] . '.', 'store', 'update'], ['', 'create', 'edit'], $request->route()->action['as']);
         $permissionName = ($routeName == "") ? "dashboard" : $routeName;
 
         if (\Auth::guest()) {
@@ -28,17 +28,17 @@ class CheckAdminPermission
                 return redirect(route('admin.login'));
             }
         } else if (\Auth::user() &&
-            \Entrust::can('adminpanel') &&
+            \Entrust::ability('super-admin', 'adminpanel') &&
             (\Entrust::ability(['super-admin'], [$permissionName]))) {
             return $next($request);
         } else if (\Auth::user() && in_array($routeName, ['logout'])) {
             // Allow the user to logout.
             return $next($request);
         } else if (\Auth::user() && in_array($routeName, ['login'])) {
-            // Allow the user to logout.
+            // If user is already authenticated, then redirect the user to dashboard.
             return redirect(route('admin.dashboard'));
         } elseif ($permissionName == 'users.profile') {
-            if (\Entrust::can('adminpanel')) {
+            if (\Entrust::ability("super-admin", 'adminpanel')) {
                 return $next($request);
             } else {
                 return abort(403, 'Unauthorized action . ');

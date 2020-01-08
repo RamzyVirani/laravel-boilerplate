@@ -44,7 +44,7 @@ class NotificationDataTable extends DataTable
     public function html()
     {
         $buttons = [];
-        if (\Entrust::can('notifications.create') || \Entrust::hasRole('super-admin')) {
+        if (\Entrust::ability("super-admin", 'notifications.create')) {
             $buttons = ['create'];
         }
         $buttons = array_merge($buttons, [

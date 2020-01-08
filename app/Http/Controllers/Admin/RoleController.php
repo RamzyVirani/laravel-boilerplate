@@ -33,7 +33,7 @@ class RoleController extends AppBaseController
     public function __construct(RoleRepository $roleRepo)
     {
         $this->roleRepository = $roleRepo;
-        $this->ModelName = 'roles';
+        $this->ModelName      = 'roles';
         $this->BreadCrumbName = 'Role';
     }
 
@@ -98,7 +98,7 @@ class RoleController extends AppBaseController
             return redirect(route('admin.roles.index'));
         }
         $permissions = $loadedPermissions = $modules = [];
-        $modules = Module::all();
+        $modules     = Module::all();
 
 
         foreach ($modules as $key => $module) {
@@ -139,7 +139,7 @@ class RoleController extends AppBaseController
             return redirect(route('admin.roles.index'));
         }
         $permissions = $modules = $modulePermissions = $loadedPermissions = [];
-        $modules = Module::all();
+        $modules     = Module::all();
 
         foreach ($modules as $key => $module) {
             if ($module->is_module == 0) {
@@ -152,7 +152,7 @@ class RoleController extends AppBaseController
             $permissions[$key] = $modulePermissiosn->toArray();
 
             foreach ($permissions[$key] as $permission) {
-                $modulePermissions[$key][] = Auth::user()->can($permission['name']);
+                $modulePermissions[$key][] = Auth::user()->ability("super-admin", $permission['name']);
             }
         }
 
@@ -202,8 +202,8 @@ class RoleController extends AppBaseController
 
         $role = $this->roleRepository->update($data, $id);
 
-        $existingPermissions = $role->perms->pluck('id')->all();
-        $newPermissions = array_diff($selectedPermissions, $existingPermissions);
+        $existingPermissions    = $role->perms->pluck('id')->all();
+        $newPermissions         = array_diff($selectedPermissions, $existingPermissions);
         $permissionsToBeDeleted = array_diff($existingPermissions, $selectedPermissions);
 
         foreach ($newPermissions as $newPermission) {

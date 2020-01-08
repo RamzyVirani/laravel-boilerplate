@@ -22,7 +22,7 @@ class MenuDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        $token = JWTAuth::fromUser(Auth::user());
+        $token     = JWTAuth::fromUser(Auth::user());
         $dataTable = new EloquentDataTable($query);
         $dataTable->editColumn('position', function (Menu $menu) use ($token) {
             return '<span class="hidden">' . $menu->position . '</span><input type="hidden" data-id="' . $menu->id . '" class="inputSort" value="' . $menu->position . '"><a href="javascript:void(0)" class="btn btn-success btn-up-ajax" data-url="' . url('api/v1/menus/' . $menu->id) . '" data-token="' . $token . '"><i class="fa fa-arrow-up"></i></a><a href="javascript:void(0)" class="btn btn-success btn-down-ajax" data-url="' . url('api/v1/menus/' . $menu->id) . '" data-token="' . $token . '"><i class="fa fa-arrow-down"></i></a>';
@@ -51,7 +51,7 @@ class MenuDataTable extends DataTable
     public function html()
     {
         $buttons = [];
-        if (\Entrust::can('menus.create') || \Entrust::hasRole('super-admin')) {
+        if (\Entrust::ability("super-admin", 'menus.create')) {
 //            $buttons = ['create'];
         }
         $buttons = array_merge($buttons, [
@@ -67,10 +67,10 @@ class MenuDataTable extends DataTable
             ->minifiedAjax()
             ->addAction(['width' => '80px', 'printable' => false])
             ->parameters([
-                'dom'     => 'Blfrtip',
-                'order'   => [[0, 'desc']],
+                'dom'       => 'Blfrtip',
+                'order'     => [[0, 'desc']],
                 'bPaginate' => false,
-                'buttons' => $buttons,
+                'buttons'   => $buttons,
             ]);
     }
 

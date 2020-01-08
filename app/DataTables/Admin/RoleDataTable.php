@@ -49,7 +49,7 @@ class RoleDataTable extends DataTable
     public function html()
     {
         $buttons = [];
-        if (\Entrust::can('roles.create') || \Entrust::hasRole('super-admin')) {
+        if (\Entrust::ability("super-admin", 'roles.create')) {
             $buttons = ['create'];
         }
         $buttons = array_merge($buttons, [
