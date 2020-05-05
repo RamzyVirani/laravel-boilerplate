@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Helper\BreadcrumbsRegister;
 use App\Http\Requests\Admin\CreateModuleConfigRequest;
@@ -38,8 +38,8 @@ class ModuleController extends Controller
      */
     public function __construct()
     {
-        $this->schemaManager = DB::getDoctrineSchemaManager();
-        $this->ModelName = 'modules';
+        $this->schemaManager  = DB::getDoctrineSchemaManager();
+        $this->ModelName      = 'modules';
         $this->BreadCrumbName = 'Modules';
 
     }
@@ -66,11 +66,11 @@ class ModuleController extends Controller
 
         if ($moduleId != null) {
             $this->data['module_data'] = Module::where('id', $moduleId)->get()->first();
-            $this->data['id'] = $moduleId;
+            $this->data['id']          = $moduleId;
         }
         BreadcrumbsRegister::Register($this->ModelName, $this->BreadCrumbName);
 
-        $tables = $this->schemaManager->listTables();
+        $tables           = $this->schemaManager->listTables();
         $protected_tables = [
             'menus',
             'migrations',
@@ -112,16 +112,16 @@ class ModuleController extends Controller
     public function postStep1(CreateModuleRequest $request)
     {
         $this->data['table_name'] = $request->table_name;
-        $this->data['name'] = $request->module;
-        $this->data['icon'] = 'fa fa-' . $request->icon;
-        $this->data['slug'] = str_plural($request->slug);
-        $this->data['is_module'] = 1;
+        $this->data['name']       = $request->module;
+        $this->data['icon']       = 'fa fa-' . $request->icon;
+        $this->data['slug']       = str_plural($request->slug);
+        $this->data['is_module']  = 1;
 
         if (isset($request->id)) {
             Module::where('id', $request->id)->update($this->data);
             $this->data['id'] = $request->id;
         } else {
-            $newModule = Module::create($this->data);
+            $newModule        = Module::create($this->data);
             $this->data['id'] = $newModule->id;
         }
 
@@ -137,8 +137,8 @@ class ModuleController extends Controller
         $tablename = Module::where('id', $moduleId)->get()->first();
 //        $this->data['tableFields'] = DB::select('SHOW FULL FIELDS FROM '.$tablename->table_name);
         $this->data['tableFields'] = $this->schemaManager->listTableDetails($tablename->table_name)->getColumns();
-        $this->data['id'] = Module::select('id')->get()->last()->id;
-        $this->data['step'] = 'step2';
+        $this->data['id']          = Module::select('id')->get()->last()->id;
+        $this->data['step']        = 'step2';
         $this->data['module_data'] = json_decode($tablename->config);
 
         $tables = $this->schemaManager->listTables();
@@ -162,10 +162,10 @@ class ModuleController extends Controller
     public function postStep2(CreateModuleConfigRequest $request)
     {
         $this->data['id'] = $request->id;
-        $tablename = Module::where('id', $request->id)->get()->first();
+        $tablename        = Module::where('id', $request->id)->get()->first();
 
         $this->data['tableFields'] = $this->schemaManager->listTableDetails($tablename->table_name)->getColumns();
-        $pk = $this->schemaManager->listTableDetails($tablename->table_name)->getPrimaryKey()->getColumns()[0];
+        $pk                        = $this->schemaManager->listTableDetails($tablename->table_name)->getPrimaryKey()->getColumns()[0];
 
         foreach ($request->name as $request_data) {
             $dataByUser[] = $request_data;
@@ -180,24 +180,24 @@ class ModuleController extends Controller
 //        }
 //        dd($relation,$relationType);
         $Config_data = [];
-        $count = 0;
+        $count       = 0;
         foreach ($this->data['tableFields'] as $key => $item) {
-            $Config_data[$count]['name'] = $item->getName();
-            $Config_data[$count]['primary'] = $item->getName() == $pk ? true : false;
-            $Config_data[$count]['dbType'] = $item->getType()->getName() == 'integer' ? 'increments' : (($item->getLength() != null) ? $item->getType()->getName() . ',' . $item->getLength() : $item->getType()->getName());
-            $Config_data[$count]['fillable'] = false;
-            $Config_data[$count]['inForm'] = false;
-            $Config_data[$count]['htmlType'] = false;
+            $Config_data[$count]['name']        = $item->getName();
+            $Config_data[$count]['primary']     = $item->getName() == $pk ? true : false;
+            $Config_data[$count]['dbType']      = $item->getType()->getName() == 'integer' ? 'increments' : (($item->getLength() != null) ? $item->getType()->getName() . ',' . $item->getLength() : $item->getType()->getName());
+            $Config_data[$count]['fillable']    = false;
+            $Config_data[$count]['inForm']      = false;
+            $Config_data[$count]['htmlType']    = false;
             $Config_data[$count]['validations'] = false;
-            $Config_data[$count]['inIndex'] = false;
-            $Config_data[$count]['searchable'] = false;
+            $Config_data[$count]['inIndex']     = false;
+            $Config_data[$count]['searchable']  = false;
             /*$Config_data[$count]['relation'] = false;
             $Config_data[$count]['type'] = $relationType;
             $Config_data[$count]['relation'] = $relation;*/
 
             if (array_search($item->getName(), $dataByUser) > -1) {
 //                $req_index = array_search($item->getName(),$dataByUser);
-                $Config_data[$count]['inIndex'] = true;
+                $Config_data[$count]['inIndex']    = true;
                 $Config_data[$count]['searchable'] = true;
 //                $Config_data[$count]['relation'] = ($request->join_table[$req_index]==null)?false:"mt1,".$request->join_table[$req_index].",user_id,".$request->join_field[$req_index];
             }
@@ -218,8 +218,8 @@ class ModuleController extends Controller
         $tablename = Module::where('id', $moduleId)->get()->first();
 //        $this->data['tableFields'] = DB::select('SHOW FULL FIELDS FROM '.$tablename->table_name);
         $this->data['tableFields'] = $this->schemaManager->listTableDetails($tablename->table_name)->getColumns();
-        $this->data['step'] = 'step3';
-        $this->data['id'] = $moduleId;
+        $this->data['step']        = 'step3';
+        $this->data['id']          = $moduleId;
         $this->data['module_data'] = json_decode($tablename->config);
         foreach ($this->data['tableFields'] as $key => $items) {
             $this->data['columns'][] = $items->getName();
@@ -235,7 +235,7 @@ class ModuleController extends Controller
     public function postStep3(UpdateModuleConfigRequest $request)
     {
         $this->data['id'] = $request->id;
-        $tablename = Module::where('id', $request->id)->get()->first();
+        $tablename        = Module::where('id', $request->id)->get()->first();
 //        $this->data['tableFields'] = DB::select('SHOW FULL FIELDS FROM '.$tablename->table_name);
         $this->data['tableFields'] = $this->schemaManager->listTableDetails($tablename->table_name)->getColumns();
 
@@ -246,15 +246,15 @@ class ModuleController extends Controller
         }
 
         $Config_data = json_decode($tablename->config);
-        $count = 0;
+        $count       = 0;
 
         foreach ($this->data['tableFields'] as $key => $item) {
             if (array_search($item->getName(), $dataByUser) > -1) {
-                $req_data_id = array_search($item->getName(), $dataByUser);
-                $Config_data[$count]->htmlType = $request->type[$req_data_id];
+                $req_data_id                      = array_search($item->getName(), $dataByUser);
+                $Config_data[$count]->htmlType    = $request->type[$req_data_id];
                 $Config_data[$count]->validations = $request->validation[$req_data_id];
-                $Config_data[$count]->fillable = true;
-                $Config_data[$count]->inForm = true;
+                $Config_data[$count]->fillable    = true;
+                $Config_data[$count]->inForm      = true;
             }
             $count++;
         }
@@ -333,8 +333,8 @@ class ModuleController extends Controller
      */
     public function updateModuleCSV($id)
     {
-        $module = Module::find($id)->toArray();
-        $newData = [
+        $module      = Module::find($id)->toArray();
+        $newData     = [
             $module['id'],
             $module['name'],
             $module['slug'],
@@ -345,7 +345,7 @@ class ModuleController extends Controller
             $module['config'],
             $module['is_protected']
         ];
-        $util = new \App\Helper\Util();
+        $util        = new \App\Helper\Util();
         $updatedData = $util->updateCSV('modules_seeder.csv', [$newData]);
         return true;
     }
