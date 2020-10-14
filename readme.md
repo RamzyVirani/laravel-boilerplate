@@ -1,4 +1,7 @@
-# Laravel boilerplate
+# Laravel boilerplate 
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/cac3e6bf435526fbf01a/maintainability)](https://codeclimate.com/github/RamzyVirani/laravel-boilerplate/maintainability) 
+[![Test Coverage](https://api.codeclimate.com/v1/badges/cac3e6bf435526fbf01a/test_coverage)](https://codeclimate.com/github/RamzyVirani/laravel-boilerplate/test_coverage)
 
 Basic boilerplate to create laravel projects with Admin Panel, Role Based Access Control, i18n support, Swagger Doc using InfyOm (Laravel CRUD Generator). 
 
